@@ -26,7 +26,7 @@ $errors=array();
 	// echo $question;
 	// echo "<script>alert('$name')</script>";
 
-	if($firstname != "" && $lastname != "" && $email != "" && $mobile != "" && $question != "" && $answer != "" && $password != "" && $confirmpassword != "")
+	if($name != "" && $email != "" && $mobile != "" && $question != "" && $answer != "" && $password != "" && $confirmpassword != "")
     {
         if (ctype_alpha(str_replace(' ', '', $name)) === false) {
             // echo "Yes\n";
@@ -85,6 +85,77 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					jQuery(function($) {
 						$(".swipebox").swipebox();
 					});
+
+					$(document).ready(function(){
+						$('#name').blur(function(){
+							$name= document.getElementById('name').value;
+							$name= $name.trim();
+							document.getElementById('name').value= $name;
+						})
+
+						$('#email').on("keyup", function(){
+							$email= document.getElementById('email').value;
+							$email= $email.replace(/\s/g, '')
+							document.getElementById('email').value= $email;
+
+						})
+
+						$('#mobile').on("blur", function(){
+							$count=0;
+							$flag=0;
+							$mobile= document.getElementById('mobile').value;
+							$mobile= $mobile.trim();
+							document.getElementById('mobile').value= $mobile;
+							$fchar= $mobile.charAt(0);
+							$len= $mobile.length;
+							
+							// alert($fchar);
+							if ($fchar != 0 && $len != 10){
+								alert("10 digits are  allowed in Mobile Field If not starts with 0");
+								document.getElementById('mobile').value='';
+							}
+							else if ($fchar == 0 && $len != 11){
+								alert("11 digits are allowed in Mobile Field If  starts with 0");
+								document.getElementById('mobile').value='';
+							}
+							else if ($mobile.charAt(0) == 0 && $mobile.charAt(1)==0){
+								alert("Two consecutive 0 in beginning are not allowed in Mobile Field If  starts with 0");
+								document.getElementById('mobile').value='';
+							}
+							// document.getElementById('email').value= $email;
+							else {
+								if($len == 11){
+									for(i=1; i<10; i++){
+										if($mobile.charAt(i) == $mobile.charAt(i+1)){
+											$count++;
+											if($count == 9){
+												$flag=1;
+											}
+										}
+										
+									}
+
+								}
+								if($len == 10){
+									for(i=0; i<8; i++){
+										if($mobile.charAt(i) == $mobile.charAt(i+1)){
+											$count++;
+											if($count == 8){
+												$flag=1;
+											}
+											
+										}
+										
+										
+									}
+								}
+								if($flag == 1){
+									alert("All digits can't be Similar");
+									document.getElementById('mobile').value='';
+								}
+							}
+						})
+					})
 				</script>
 <!--script-->
 </head>
@@ -103,7 +174,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<h3>personal information</h3>
 					 <div>
 						<span>Full Name<label>*</label></span>
-						<input type="text" name="name" pattern="^[A-Za-z]+( [A-Za-z]+)*$" title="Only Alphabets are allowed" required> 
+						<input type="text" id="name" name="name" pattern="^[A-Za-z]+( [A-Za-z]+)*$" title="Only Alphabets are allowed" required> 
 					 </div>
 					 <!-- <div>
 						<span>Last Name<label>*</label></span>
@@ -111,11 +182,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					 </div> -->
 					 <div>
 						 <span>Email Address<label>*</label></span>
-						 <input type="text" name="email" pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" title="Only Valid Email Format is Required" required> 
+						 <input type="text" id="email" name="email" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" title="Only Valid Email Format is Required" required> 
 					 </div>
 					 <div>
 						<span>Mobile<label>*</label></span>
-						<input type="text" name="mobile"  required> 
+						<input type="text" id="mobile" name="mobile" pattern="[0-9]{10,11}" required> 
 					 </div>
 					 <div>
 						 <span>Security Question<label>*</label></span>
@@ -144,7 +215,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						    <h3>login information</h3>
 							 <div>
 								<span>Password<label>*</label></span>
-								<input type="password" name="password">
+								<input type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
 							 </div>
 							 <div>
 								<span>Confirm Password<label>*</label></span>

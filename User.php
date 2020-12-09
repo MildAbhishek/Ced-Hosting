@@ -1,4 +1,5 @@
 <?php
+session_start();
 class User{
     public $email;
     public $name;
@@ -23,6 +24,7 @@ class User{
             
                 // header('Location: login.php');
                 echo ("<script>alert('Successfully Registered')</script>");
+                header('Location: mobileverification.php');
             } else {
                 echo ("<script>alert('Registration Failed')</script>");
             }
@@ -43,6 +45,8 @@ class User{
                 } else {
                     // header('Location: login.php');
                     echo ("<script>alert('Successfully Logged In')</script>");
+                    $_SESSION['userdata']=array('id'=>$row['id'], 'email'=>$row['email'], 'name'=> $row['name'], 'mobile'=>$row['mobile'], 'emailapproved'=>$row['email_approved'], 'phoneapproved'=>$row['phone_approved'], 'active'=>$row['active'], 'isadmin'=>$row['is_admin'], 'signupdate'=>$row['sign_up_date'], 'password'=>$row['password'], 'securityquestion'=>$row['security_question'], 'securityanswer'=>$row['security_answer']);
+                    header('Location: index.php');
                 }
             }
         }else {

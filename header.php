@@ -1,3 +1,6 @@
+<?php 
+// session_start();
+?>
 <!---header--->
 <div class="header">
 			<div class="container">
@@ -49,7 +52,15 @@
 								<li><a href="codes.html">Blog</a></li>
 								<li><a href="contact.html">Contact</a></li>
 								<li><a href="contact.html"><i class="fa fa-shopping-cart"></i></a></li>
-								<li><a href="login.php">Login</a></li>
+								<?php if (isset($_SESSION['userdata'])){?>
+									<li><a href="login.php">Login</a></li>
+								
+								<?php
+								} else {?>
+									<li><a href="logout.php">Logout</a></li>
+								<?php
+								}?>
+								
 							</ul>
 									  
 						</div><!-- /.navbar-collapse -->

@@ -1,0 +1,3 @@
+Email: 
+(?!.*?\.\.) // Not 2 consecutive dots.
+/^\S*$/;     // a string consisting only of non-whitespaces

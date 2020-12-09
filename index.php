@@ -138,8 +138,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 				</div>
 			<!---brilliantly--->
-			<!---team--->
-				<div class="team">
+			<!-- -team-->
+				<!-- <div class="team">
 					<h3>our team is one of the best</h3>
 					<h5>Professionals that are always on top of their game</h5>
 					<div class="team-grids">
@@ -240,7 +240,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</section>
 						
 					</div>
-				</div>
+				</div> -->
 				<!---team--->
 				<!---prices--->
 					<div class="price-section">
