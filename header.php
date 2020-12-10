@@ -1,5 +1,11 @@
 <?php 
-// session_start();
+session_start();
+include_once 'Dbcon.php';
+include_once 'Product.php';
+
+$connection= new Dbcon();
+$newproduct= new Product();
+$result= $newproduct->fetchCategory($connection->conn);
 ?>
 <!---header--->
 <div class="header">
@@ -37,12 +43,14 @@
 											<li><a href="login.html">Login</a></li>
 											<li><a href="portfolio.html">Portfolio</a></li>
 										</ul>
-								</li> -->
-								<li><a href="services.html">Services</a></li>
+								</li>-->
+
+								<li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services<i class="caret"></i></a></li>
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hosting<i class="caret"></i></a>
 									<ul class="dropdown-menu">
-										<li><a href="linuxhosting.html">Linux hosting</a></li>
+										<?php foreach($result as $key=>$val){?>
+										<li><a href="linuxhosting.html"><?php echo $val['prod_name'];?></a></li><?php } ?>
 										<!-- <li><a href="wordpresshosting.html">WordPress Hosting</a></li>
 										<li><a href="windowshosting.html">Windows Hosting</a></li>
 										<li><a href="cmshosting.html">CMS Hosting</a></li> -->
@@ -53,11 +61,11 @@
 								<li><a href="contact.html">Contact</a></li>
 								<li><a href="contact.html"><i class="fa fa-shopping-cart"></i></a></li>
 								<?php if (isset($_SESSION['userdata'])){?>
-									<li><a href="login.php">Login</a></li>
+									<li><a href="logout.php">Logout</a></li>
 								
 								<?php
 								} else {?>
-									<li><a href="logout.php">Logout</a></li>
+									<li><a href="login.php">Login</a></li>
 								<?php
 								}?>
 								

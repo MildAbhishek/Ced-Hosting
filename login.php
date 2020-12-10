@@ -5,8 +5,8 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <?php 
-include 'Dbcon.php';
-include 'User.php';
+include_once 'Dbcon.php';
+include_once 'User.php';
 
 $connection= new Dbcon();
 $newuser= new User();
