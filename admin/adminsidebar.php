@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="resources/css/style.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="resources/css/invalid.css" type="text/css" media="screen" />
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.22/datatables.min.css"/>
+<link rel="stylesheet" href="adminstyle.css">
 <script type="text/javascript" src="resources/scripts/jquery-1.3.2.min.js"></script>
 <script type="text/javascript" src="resources/scripts/simpla.jquery.configuration.js"></script>
 <script type="text/javascript" src="resources/scripts/facebox.js"></script>
@@ -36,7 +37,7 @@
 			<div id="profile-links">
 				Hello, <a href="#" title="Edit your profile">John Doe</a>, you have <a href="#messages" rel="modal" title="3 Messages">3 Messages</a><br />
 				<br />
-				<a href="#" title="View the Site">View the Site</a> | <a href="#" title="Sign Out">Sign Out</a>
+				<a href="#" title="View the Site">View the Site</a> | <a href="../logout.php" title="Sign Out">Sign Out</a>
 			</div>        
 			
 			<ul id="main-nav">  <!-- Accordion Menu -->
@@ -111,6 +112,7 @@
 					<ul>
 						<li><a href="#">Update Company Info</a></li>
 						<li><a href="#">Change Security Question</a></li>
+						<li><a href="#">Change Password</a></li>
 						
 					</ul>
 				</li>   

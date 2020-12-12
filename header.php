@@ -1,5 +1,5 @@
 <?php 
-session_start();
+// session_start();
 include_once 'Dbcon.php';
 include_once 'Product.php';
 
@@ -28,8 +28,8 @@ $result= $newproduct->fetchCategory($connection->conn);
 			<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav">
-								<li class="active"><a href="index.html">Home <i class="sr-only">(current)</i></a></li>
-								<li><a href="about.html">About</a></li>
+								<li class="active"><a href="index.php">Home <i class="sr-only">(current)</i></a></li>
+								<li><a href="about.php">About</a></li>
 								<!-- <li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages<i class="caret"></i></a>
 										<ul class="dropdown-menu">
@@ -56,10 +56,10 @@ $result= $newproduct->fetchCategory($connection->conn);
 										<li><a href="cmshosting.html">CMS Hosting</a></li> -->
 									</ul>			
 								</li>
-								<li><a href="codes.html">Pricing</a></li>
-								<li><a href="codes.html">Blog</a></li>
-								<li><a href="contact.html">Contact</a></li>
-								<li><a href="contact.html"><i class="fa fa-shopping-cart"></i></a></li>
+								<li><a href="pricing.php">Pricing</a></li>
+								<li><a href="blog.php">Blog</a></li>
+								<li><a href="contact.php">Contact</a></li>
+								<li><a href="contact.php"><i class="fa fa-shopping-cart"></i></a></li>
 								<?php if (isset($_SESSION['userdata'])){?>
 									<li><a href="logout.php">Logout</a></li>
 								

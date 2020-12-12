@@ -36,16 +36,20 @@ if(isset($_POST['update'])){
 	$categoryavailable= $_POST['editavailable'];
 	// echo "<script>alert($categoryid)</script>";
 	$result= $newproduct->editCategory($categoryid, $categoryname, $categorylink, $categoryavailable, $connection->conn);
-	if ($result===true){
+	if ($result==1){
 		echo "<script>alert('Successfully Updated')</script>";
-	}else {
+	}
+	if ($result==0){
 		echo "<script>alert('Updation Failed')</script>";
+	}
+	if ($result==2){
+		echo "<script>alert('Nothing Updated')</script>";
 	}
 
 }
 
 // Show Category in Table
-$result= $newproduct->showCategory($connection->conn);
+$result= $newproduct->fetchCategory($connection->conn);
 // End of show category in Table
 
 ?>
@@ -220,6 +224,49 @@ $result= $newproduct->showCategory($connection->conn);
 					</div> <!-- End #tab1 -->
 					
 					<div class="tab-content" id="tab2">
+					<script>
+						$(document).ready(function(){
+							// alert("Validation");
+							$flag=0;
+							$('#categoryparentid').blur(function(){
+								// alert("KeyUp");
+								$id= document.getElementById('categoryparentid').value;
+								$id= $.trim($id);
+								$id = $id.replace(/ +/g, '');
+								document.getElementById('categoryparentid').value= $id;
+							})
+
+							$('#categoryname').blur(function(){
+								// alert("KeyUp");
+								$categoryname= document.getElementById('categoryname').value;
+								$categoryname= $.trim($categoryname);
+								$categoryname = $categoryname.replace(/  +/g, ' ');
+								document.getElementById('categoryname').value= $categoryname;
+
+								$id= document.getElementById('categoryparentid').value;
+								$categoryname= document.getElementById('categoryname').value;
+								$categorylink= document.getElementById('categorylink').value;
+								if($id != '' && $categoryname != ''){
+								document.getElementById('submitBtn1').style.display="block";
+							}
+
+
+							})
+
+							$('#categorylink').blur(function(){
+								// alert("KeyUp");
+								$categorylink= document.getElementById('categorylink').value;
+								$categorylink= $.trim($categorylink);
+								$categorylink = $categorylink.replace(/ +/g, '');
+								document.getElementById('categorylink').value= $categorylink;
+
+								
+							})
+
+							
+
+						});
+					</script>
 					
 						<form action="" method="post">
 							
@@ -227,25 +274,25 @@ $result= $newproduct->showCategory($connection->conn);
 								
 								<p>
 									<label>Category Parent Id</label>
-										<input class="text-input small-input" type="text" id="" name="parentid" /> <span class="input-notification success png_bg" style="display:none;">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
-										<br /><small>A small description of the field</small>
+										<input class="text-input small-input" type="text" id="categoryparentid" name="parentid" placeholder="Ex: 123" required/> <span class="input-notification success png_bg" style="display:none;">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
+										<br /><small>Enter Numeric Value </small>
                                 </p>
                                 
                                 <p>
 									<label>Category Name</label>
-									    <input class="text-input small-input" type="text" id="" name="categoryname" /> <span class="input-notification success png_bg" style="display:none;">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
-										<br /><small>A small description of the field</small>
+									    <input class="text-input small-input" type="text" id="categoryname" name="categoryname" placeholder="Ex: Abc" required/> <span class="input-notification success png_bg" style="display:none;">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
+										<br /><small>Enter only Alphabets</small>
                                 </p>
                                 
                                 <p>
 									<label>Category Link</label>
-									    <input class="text-input small-input" type="text" id="" name="categorylink" /> <span class="input-notification success png_bg" style="display:none;">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
-										<br /><small>A small description of the field</small>
+									    <input class="text-input small-input" type="text" id="categorylink" name="categorylink" placeholder="Ex: www.abc.com"/> <span class="input-notification success png_bg" style="display:none;">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
+										<br /><small>Enter Link in valid format</small>
 								</p>
 								
 							
 								<p>
-									<input class="button" type="submit" value="Submit" name="submit"/>
+									<input class="button" type="submit" value="Submit" name="submit" id="submitBtn1" style="display:none;"/>
 								</p>
 								
 							</fieldset>

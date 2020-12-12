@@ -90,12 +90,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						$('#name').blur(function(){
 							$name= document.getElementById('name').value;
 							$name= $name.trim();
-							document.getElementById('name').value= $name;
+							$name = $name.replace(/  +/g, ' ');
+							document.getElementById('name').value= name;
 						})
 
 						$('#email').on("keyup", function(){
 							$email= document.getElementById('email').value;
-							$email= $email.replace(/\s/g, '')
+							$email= $email.replace(/\s/g, '');
+							$email= $email.replace(/\.{2,}/g, '\.');
+
 							document.getElementById('email').value= $email;
 
 						})

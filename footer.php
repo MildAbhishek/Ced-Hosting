@@ -85,9 +85,9 @@
 							</div>
 							<div class="col-md-3 footer-grid">
 								<h4>get in touch</h4>
-								<p>8901 Marmora Road</p>
-								<p>Glasgow, DO4 89GR.</p>
-								<p>Telephone : +1 234 567 890</p>
+								<p>3/460, Opp to Nehru Enclave</p>
+								<p>Vishwas Khand, Lucknow</p>
+								<p>Uttar Pradesh, 226010</p>
 								<p>Telephone : +1 234 567 890</p>
 								<p>FAX : + 1 234 567 890</p>
 								<p>E-mail : <a href="mailto:example@mail.com"> example@mail.com</a></p>
@@ -95,7 +95,7 @@
 							<div class="clearfix"></div>
 						</div>
 						<div class="copy-section">
-							<p>&copy; 2016 Planet Hosting. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
+							<p>&copy; 2016 Ced Hosting. All rights reserved | Design by <a href="http://w3layouts.com">Abhishek</a></p>
 						</div>
 					</div>
 				</div>
