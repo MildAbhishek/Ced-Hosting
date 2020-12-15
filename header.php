@@ -50,7 +50,7 @@ $result= $newproduct->fetchCategory($connection->conn);
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hosting<i class="caret"></i></a>
 									<ul class="dropdown-menu">
 										<?php foreach($result as $key=>$val){?>
-										<li><a href="linuxhosting.html"><?php echo $val['prod_name'];?></a></li><?php } ?>
+										<li><a href="http://localhost/training/cedhosting/catpage.php?id=<?php echo $val['id']; ?>"><?php echo $val['prod_name'];?></a></li><?php } ?>
 										<!-- <li><a href="wordpresshosting.html">WordPress Hosting</a></li>
 										<li><a href="windowshosting.html">Windows Hosting</a></li>
 										<li><a href="cmshosting.html">CMS Hosting</a></li> -->

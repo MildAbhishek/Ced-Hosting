@@ -18,5 +18,14 @@ if(isset($_POST)){
             echo 0;
         }
     }
+
+    if($action== 'deleteproduct'){
+        $result= $newproduct->deleteProduct($id, $connection->conn);
+        if($result == true){
+            echo 1;
+        }else {
+            echo 0;
+        }
+    }
  }
 ?>

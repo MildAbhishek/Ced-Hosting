@@ -28,19 +28,19 @@ $errors=array();
 
 	if($name != "" && $email != "" && $mobile != "" && $question != "" && $answer != "" && $password != "" && $confirmpassword != "")
     {
-        if (ctype_alpha(str_replace(' ', '', $name)) === false) {
-            // echo "Yes\n";
-			echo "<script>alert('Only Alphabets are allowed in Name')</script>";
-            $errors[]=array('input'=>'First Name', 'msg'=>'Only Alphabet is allowed');
-            // exit;
-		}
+        // if (ctype_alpha(str_replace(' ', '', $name)) === false) {
+        //     // echo "Yes\n";
+		// 	echo "<script>alert('Only Alphabets are allowed in Name')</script>";
+        //     $errors[]=array('input'=>'First Name', 'msg'=>'Only Alphabet is allowed');
+        //     // exit;
+		// }
 		
-        if ( ! preg_match('/^[0-9]{10}+$/', $mobile)) 
-        {
-            echo "<script>alert('Only 10 digits are allowed')</script>";
-            $errors[]=array('input'=>'Mobile', 'msg'=>'Only 10 digits are allowed');
-            // exit;
-        }
+        // if ( ! preg_match('/^[0-9]{10}+$/', $mobile)) 
+        // {
+        //     echo "<script>alert('Only 10 digits are allowed')</script>";
+        //     $errors[]=array('input'=>'Mobile', 'msg'=>'Only 10 digits are allowed');
+        //     // exit;
+        // }
         // $errors[]=array('input'=>'Fields', 'msg'=>'Required Field');
         if ($password != $confirmpassword) {
             echo "<script>alert('Password does not match')</script>";
@@ -88,74 +88,158 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 					$(document).ready(function(){
 						$('#name').blur(function(){
-							$name= document.getElementById('name').value;
-							$name= $name.trim();
-							$name = $name.replace(/  +/g, ' ');
-							document.getElementById('name').value= name;
+							var $name= document.getElementById('name').value;
+							if($name != ''){
+								$name= $name.trim();
+								$name = $name.replace(/  +/g, ' ');
+								var regex= /^[a-zA-Z ]+$/ ;
+								if(regex.test($name)){
+									document.getElementById('name').value= $name;
+								} else {
+									document.getElementById('name').value= '';
+									alert("Invalid Name Format");
+								}
+							} else {
+								alert("Name is Required");
+							}
+							
 						})
 
 						$('#email').on("keyup", function(){
-							$email= document.getElementById('email').value;
-							$email= $email.replace(/\s/g, '');
-							$email= $email.replace(/\.{2,}/g, '\.');
-
-							document.getElementById('email').value= $email;
-
+							var $email= document.getElementById('email').value;
+							
+								$email= $email.replace(/\s/g, '');
+								$email= $email.replace(/\.{2,}/g, '\.');
+								document.getElementById('email').value= $email;
+							
 						})
+						$('#email').blur(function(){
+							$email= document.getElementById('email').value;
+							if($email != ''){
+								var regex= /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+								if(regex.test($email)){
+									document.getElementById('email').value= $email;
+								} else {
+									alert("Invalid Format of Email");
+									document.getElementById('email').value= "";
+
+								} 
+							} else {
+								alert("Email is Required");
+							}
+						})
+
+						$('#answer').blur(function(){
+							// alert("Answer");
+							var $answer= document.getElementById('answer').value;
+							if ($answer != ''){
+
+							
+								// alert($answer);
+								$answer= $answer.trim();
+								$answer = $answer.replace(/  +/g, ' ');
+								var regex1= /^[a-zA-Z0-9_]*$/ ;
+								var regex2= /\D/ ;
+								if (regex1.test($answer) && regex2.test($answer)) {
+									document.getElementById('answer').value= $answer;
+								} else {
+									alert("Invalid Answer Format");
+									document.getElementById('answer').value= '';
+								}
+							} else {
+								alert("Answer is Required Field");
+							}
+							
+						})
+
+						$('#password').blur(function(){
+							// alert("Password");
+							var $password= document.getElementById('password').value;
+							if ($password != ''){
+								$password= $password.trim();
+								var regex= /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+								if(regex.test($password)){
+									document.getElementById('password').value= $password;
+								} else {
+									document.getElementById('password').value= "";
+									alert("Invalid Format");
+								}
+							} else {
+								alert("Password is Required");
+							}
+							
+							
+						})
+						$('#password').keypress(function(){
+							// alert("Hii..");
+						})
+
+						
 
 						$('#mobile').on("blur", function(){
 							$count=0;
 							$flag=0;
 							$mobile= document.getElementById('mobile').value;
-							$mobile= $mobile.trim();
-							document.getElementById('mobile').value= $mobile;
-							$fchar= $mobile.charAt(0);
-							$len= $mobile.length;
-							
-							// alert($fchar);
-							if ($fchar != 0 && $len != 10){
-								alert("10 digits are  allowed in Mobile Field If not starts with 0");
-								document.getElementById('mobile').value='';
-							}
-							else if ($fchar == 0 && $len != 11){
-								alert("11 digits are allowed in Mobile Field If  starts with 0");
-								document.getElementById('mobile').value='';
-							}
-							else if ($mobile.charAt(0) == 0 && $mobile.charAt(1)==0){
-								alert("Two consecutive 0 in beginning are not allowed in Mobile Field If  starts with 0");
-								document.getElementById('mobile').value='';
-							}
-							// document.getElementById('email').value= $email;
-							else {
-								if($len == 11){
-									for(i=1; i<10; i++){
-										if($mobile.charAt(i) == $mobile.charAt(i+1)){
-											$count++;
-											if($count == 9){
-												$flag=1;
-											}
-										}
-										
+							if($mobile != ''){
+								$mobile= $mobile.trim();
+								var regex= /^[0-9]*$/;
+								if (!regex.test($mobile)){
+									alert("Invalid Digits");
+									document.getElementById('mobile').value= '';
+								} else {
+								// $mobile= $mobile.replace(/./g, '');
+									document.getElementById('mobile').value= $mobile;
+									$fchar= $mobile.charAt(0);
+									$len= $mobile.length;
+									
+									// alert($fchar);
+									if ($fchar != '0' && $len != 10){
+										alert("10 digits are  allowed in Mobile Field If not starts with 0");
+										document.getElementById('mobile').value='';
 									}
+									else if ($fchar == '0' && $len != 11){
+										alert("11 digits are allowed in Mobile Field If  starts with 0");
+										document.getElementById('mobile').value='';
+									}
+									else if ($mobile.charAt(0) == '0' && $mobile.charAt(1)=='0'){
+										alert("Two consecutive 0 in beginning are not allowed in Mobile Field If  starts with 0");
+										document.getElementById('mobile').value='';
+									}
+									// document.getElementById('email').value= $email;
+									else {
+										if($len == 11){
+											for(i=1; i<10; i++){
+												if($mobile.charAt(i) == $mobile.charAt(i+1)){
+													$count++;
+													if($count == 9){
+														$flag=1;
+													}
+												}
+												
+											}
 
-								}
-								if($len == 10){
-									for(i=0; i<8; i++){
-										if($mobile.charAt(i) == $mobile.charAt(i+1)){
-											$count++;
-											if($count == 8){
-												$flag=1;
-											}
-											
 										}
-										
-										
+										if($len == 10){
+											for(i=0; i<8; i++){
+												if($mobile.charAt(i) == $mobile.charAt(i+1)){
+													$count++;
+													if($count == 8){
+														$flag=1;
+													}
+													
+												}
+												
+												
+											}
+										}
+										if($flag == 1){
+											alert("All digits can't be Similar");
+											document.getElementById('mobile').value='';
+										}
 									}
-								}
-								if($flag == 1){
-									alert("All digits can't be Similar");
-									document.getElementById('mobile').value='';
-								}
+								} 
+							} else {
+								alert("Mobile Field is Required");
 							}
 						})
 					})
@@ -177,7 +261,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<h3>personal information</h3>
 					 <div>
 						<span>Full Name<label>*</label></span>
-						<input type="text" id="name" name="name" pattern="^[A-Za-z]+( [A-Za-z]+)*$" title="Only Alphabets are allowed" required> 
+						<input type="text" id="name" name="name" pattern="" title="Only Alphabets are allowed" required> 
 					 </div>
 					 <!-- <div>
 						<span>Last Name<label>*</label></span>
@@ -185,7 +269,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					 </div> -->
 					 <div>
 						 <span>Email Address<label>*</label></span>
-						 <input type="text" id="email" name="email" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" title="Only Valid Email Format is Required" required> 
+						 <input type="text" id="email" name="email" pattern="" title="Only Valid Email Format is Required" required> 
 					 </div>
 					 <div>
 						<span>Mobile<label>*</label></span>
@@ -206,7 +290,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					 </div>
 					 <div>
 						<span>Answer<label>*</label></span>
-						<input type="text" name="answer"> 
+						<input type="text" name="answer" id="answer"> 
 					</div>
 
 					 <!-- <div class="clearfix"> </div> -->
@@ -218,11 +302,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						    <h3>login information</h3>
 							 <div>
 								<span>Password<label>*</label></span>
-								<input type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+								<input type="password" name="password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
 							 </div>
 							 <div>
 								<span>Confirm Password<label>*</label></span>
-								<input type="password" name="confirmpassword">
+								<input type="password" name="confirmpassword" id="confirmpassword">
 							 </div>
 					 </div>
 					 

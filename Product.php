@@ -89,6 +89,7 @@ class Product{
         }
     }
 
+    // Add Product
     public function addProduct($productcategory, $productname, $link, $conn){
         $parentid="";
         $sql= "SELECT * FROM tbl_product WHERE `prod_name`='$productcategory' ";
@@ -130,6 +131,52 @@ class Product{
         }
         
     }
+    // End of Add Product
+    
+    // Update Product
+    public function updateProduct($productid, $productcategory, $productname, $available, $link, $conn){
+        $parentid="";
+        $sql= "SELECT * FROM tbl_product WHERE `prod_name`='$productcategory' ";
+        $result= $conn->query($sql);
+        if($result->num_rows > 0){
+            while($row= $result->fetch_assoc()){
+                $parentid= $row['id'];
+            }
+        } 
+        $sql= "UPDATE tbl_product SET `prod_parent_id`='$parentid', `prod_name`='$productname', `link`='$link', `prod_available`='$available' WHERE `id`='$productid' ";
+        // echo $sql;
+        $result= $conn->query($sql);
+        if($result){
+            return 1;
+
+        } else{
+            return 0;
+        }
+        
+    }
+
+    public function updateProductDescription($productname, $description, $monthlyprice, $annualprice, $productsku, $conn){
+        $parentid="";
+        $sql= "SELECT * FROM tbl_product WHERE `prod_name`='$productname' ";
+        $result= $conn->query($sql);
+        if($result->num_rows > 0){
+            while($row= $result->fetch_assoc()){
+                $productid= $row['id'];
+            }
+        } 
+        $sql= "UPDATE tbl_product_description SET `prod_id`='$productid', `description`='$description', `mon_price`='$monthlyprice', `annual_price`='$annualprice' WHERE `prod_id`='$productid' ";
+        // echo $sql;
+        $result= $conn->query($sql);
+        if($result){
+            return 1;
+
+        } else{
+            return 0;
+        }
+        
+    }
+
+
 
     public function fetchProductDetail($conn){
         $arr= array();
@@ -149,6 +196,32 @@ class Product{
         $result= $conn->query($sql);
         $categoryname= $result->fetch_array()[0] ?? '' ;
         return $categoryname;
+    }
+
+    // Delete Product
+
+    public function deleteProduct($productid, $conn){
+        $sql= "DELETE `tbl_product`, `tbl_product_description` FROM tbl_product INNER JOIN tbl_product_description ON tbl_product.id = tbl_product_description.prod_id WHERE `prod_id`='$productid' ";
+        $result= $conn->query($sql);
+        if ($result){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function fetchAllProductDetail($id, $conn){
+        echo "<script>alert('Hii..');</script>";
+        $arr= array();
+        $sql= "SELECT * FROM tbl_product INNER JOIN tbl_product_description ON tbl_product.id = tbl_product_description.prod_id WHERE `prod_parent_id`='$id' ";
+        $result= $conn->query($sql);
+        if($result->num_rows >0){
+            while($row= $result->fetch_assoc()){
+                array_push($arr, $row);
+
+            }
+            return $arr;
+        }
     }
 }
 ?>

@@ -90,25 +90,29 @@ $result= $newproduct->fetchCategory($connection->conn);
 								<p>
 									<label>Category Id</label>
 									    <input class="text-input small-input" type="text" id="editid" name="editid" readonly title="Non-Editable"/> <span class="input-notification success png_bg" style="display:none;">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
-										<br /><small>A small description of the field</small>
+										<br /><small>Non Editable Field</small>
 								</p>
 								
                                 <p>
 									<label>Category Name</label>
 									    <input class="text-input small-input" type="text" id="editname" name="editname" /> <span class="input-notification success png_bg" style="display:none;">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
-										<br /><small>A small description of the field</small>
+										<br /><small>Enter Category Name</small>
                                 </p>
                                 
                                 <p>
 									<label>Category Link</label>
 									    <input class="text-input small-input" type="text" id="editlink" name="editlink" /> <span class="input-notification success png_bg" style="display:none;">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
-										<br /><small>A small description of the field</small>
+										<br /><small>Enter valid Link</small>
 								</p>
 
 								<p>
 									<label>Product Available</label>
-									    <input class="text-input small-input" type="number" id="editavailable" name="editavailable" /> <span class="input-notification success png_bg" style="display:none;">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
-										<br /><small>A small description of the field</small>
+										<select name="editavailable" id="editavailable"  class="text-input small-input">
+											<option value="1">Available</option>
+											<option value="0">Unavailable</option>
+										</select>
+									    <br /><small>Choose From Dropdown</small>
+										
 								</p>
 								
 							
@@ -228,27 +232,26 @@ $result= $newproduct->fetchCategory($connection->conn);
 						$(document).ready(function(){
 							// alert("Validation");
 							$flag=0;
-							$('#categoryparentid').blur(function(){
-								// alert("KeyUp");
-								$id= document.getElementById('categoryparentid').value;
-								$id= $.trim($id);
-								$id = $id.replace(/ +/g, '');
-								document.getElementById('categoryparentid').value= $id;
-							})
+							// $('#categoryparentid').blur(function(){
+							// 	// alert("KeyUp");
+							// 	$id= document.getElementById('categoryparentid').value;
+							// 	$id= $.trim($id);
+							// 	$id = $id.replace(/ +/g, '');
+							// 	document.getElementById('categoryparentid').value= $id;
+							// })
 
 							$('#categoryname').blur(function(){
-								// alert("KeyUp");
-								$categoryname= document.getElementById('categoryname').value;
+								alert("KeyUp");
+								var $categoryname= document.getElementById('categoryname').value;
 								$categoryname= $.trim($categoryname);
 								$categoryname = $categoryname.replace(/  +/g, ' ');
+								var regex1= /^[a-zA-Z ]*$/g;
+								// var regex2= //;
 								document.getElementById('categoryname').value= $categoryname;
-
-								$id= document.getElementById('categoryparentid').value;
-								$categoryname= document.getElementById('categoryname').value;
-								$categorylink= document.getElementById('categorylink').value;
-								if($id != '' && $categoryname != ''){
-								document.getElementById('submitBtn1').style.display="block";
-							}
+								
+								displayBtn();
+								
+							
 
 
 							})
@@ -259,23 +262,39 @@ $result= $newproduct->fetchCategory($connection->conn);
 								$categorylink= $.trim($categorylink);
 								$categorylink = $categorylink.replace(/ +/g, '');
 								document.getElementById('categorylink').value= $categorylink;
-
+								displayBtn();
 								
 							})
+
+							function displayBtn(){
+								var $id= document.getElementById('categoryparentid').value;
+								var $categoryname= document.getElementById('categoryname').value;
+								
+								// var $categorylink= document.getElementById('categorylink').value;
+								if(($id != '') && ($categoryname != '')){
+									document.getElementById('submitBtn1').style.display="block";
+								}
+
+							}
 
 							
 
 						});
 					</script>
 					
+					
 						<form action="" method="post">
 							
 							<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
 								
 								<p>
-									<label>Category Parent Id</label>
-										<input class="text-input small-input" type="text" id="categoryparentid" name="parentid" placeholder="Ex: 123" required/> <span class="input-notification success png_bg" style="display:none;">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
-										<br /><small>Enter Numeric Value </small>
+									<label>Category Parent</label>
+										
+										<select class="text-input small-input" id="categoryparentid"  name="parentid">
+											<option value="">Select</option>
+											<option value="1">Hosting</option>
+										</select>
+										<br /><small>Choose From Dropdown </small>
                                 </p>
                                 
                                 <p>
