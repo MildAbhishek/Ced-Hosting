@@ -15,22 +15,24 @@ $(document).ready(function(){
     })
 
     $('.delCatBtn').click(function(){
-        alert("DelBtn");
-        $dataId = $(this).attr("data-id");
-        $action= "deletecategory"
-        alert($dataId);
-        $.ajax({
-            url:'ajax.php',
-            type:'POST',
-            data:{id : $dataId, action : $action},
-            success : function(data){
-                if(data==1){
-                    alert("Category Deleted");
-                }else {
-                    alert("Deletion Failed");
+        // alert("DelBtn");
+        if (confirm("Do You want to delete")){
+            $dataId = $(this).attr("data-id");
+            $action= "deletecategory"
+            // alert($dataId);
+            $.ajax({
+                url:'ajax.php',
+                type:'POST',
+                data:{id : $dataId, action : $action},
+                success : function(data){
+                    if(data==1){
+                        alert("Category Deleted");
+                    }else {
+                        alert("Deletion Failed");
+                    }
                 }
-            }
-        });
+            });
+        }
     })
 
     $('.editProdBtn').click(function(){
@@ -49,7 +51,7 @@ $(document).ready(function(){
         $dataFreeDomain = $(this).attr("data-freedomain");
         $dataTechnologySupport = $(this).attr("data-technologysupport");
         $dataMailbox = $(this).attr("data-mailbox");
-        // alert($dataId);
+        alert($dataLink);
         document.getElementById('editProductTable').style.display="block";
 
         document.getElementById('editProductId').value=$dataId;

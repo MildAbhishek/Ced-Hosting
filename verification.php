@@ -7,27 +7,33 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <?php
 session_start();
-$mobile= $_SESSION['userdata']['mobile'];
-$email= $_SESSION['userdata']['email'];
+
+if (isset($_SESSION['signup'])){
+	$mobile= $_SESSION['signup']['mobile'];
+	$email= $_SESSION['signup']['email'];
+}
+$message="";
 
 if(isset($_POST['sendmobileotpBtn'])){
 	$mobile= $_POST['mobilenumber'];
-	echo "<script>alert('$mobile')</script>";
+	// echo "<script>alert('$mobile')</script>";
 	$_SESSION['mobilenumber']=$mobile;
 
 	$otp = rand(1000, 9999);
-    $_SESSION['session_otp'] = $otp;
+	$_SESSION['session_otp'] = $otp;
+	
     $message = "Your One Time Password is " .$otp;
 }
 ?>
 
-
 <?php
-$message="";
+
+// echo $_SESSION['session_otp'];
+// $message="";
 
 $fields = array(
     "sender_id" => "FSTSMS",
-    "message" => ".$message.",
+    "message" =>"$message",
     "language" => "english",
     "route" => "p",
     "numbers" => "$mobile",
@@ -63,7 +69,33 @@ if ($err) {
   echo "cURL Error #:" . $err;
 } else {
   echo $response;
+ 
 }
+?>
+
+<?php 
+include 'User.php';
+include 'Dbcon.php';
+
+$newuser= new User();
+$connection= new Dbcon();
+
+if (isset($_POST['verifymobileotpBtn'])){
+	// echo "<script>alert('Yes')</script>";
+	$otp= $_POST['mobileotpfield'];
+
+	// echo "<script>alert($otp)</script>";
+	// echo "<script>alert($_SESSION['session_otp'])</script>";
+	if ($otp == $_SESSION['session_otp']) {
+		// echo "<script>alert('Verified')</script>";
+		$newuser->verifyMobile($mobile, $connection->conn);
+		
+		
+	} else {
+		echo "Invalid OTP";
+	}
+}
+
 ?>
 
 
@@ -104,18 +136,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 });
 </script>
 
-<!-- <script>
-$(document).ready(function(){
-	$('#sendmobileotpBtn').click(function(){
-		alert("Hii");
-		document.getElementById('mobileotpfield').style.display="block";
-		document.getElementById('verifymobileotpBtn').style.display="block";
-		document.getElementById('sendmobileotpBtn').style.display="none";
-	});
-	
 
-});
-</script> -->
+
 					
 <!--script-->
 </head>
@@ -132,21 +154,21 @@ $(document).ready(function(){
 						<form class="form-horizontal" action="" method="POST">
 							<div>
 								<span>Mobile<label>*</label></span>
-								<input type="number" id="mobile" name="mobilenumber" value="<?php echo $mobile; ?>" title="Only Valid Mobile Number is desired" required> 
+								<input type="number" id="mobile" name="mobilenumber" value="<?php echo $mobile; ?>" title="Only Valid Mobile Number is desired" > 
 							</div>
 							
 							<div class="register-but" id="sendmobileotpBtn">
 							<input type="submit" value="Send OTP" name="sendmobileotpBtn" class="btn btn-default" >
 							<!-- <div class="clearfix"> </div> -->
 							</div>
-							<!-- <div id="mobileotpfield" style="display:none;">
+							<div id="mobileotpfield">
 								<span>OTP<label>*</label></span>
-								<input type="number" name="mobileotpfield" pattern="" title="" required> 
+								<input type="number" name="mobileotpfield" pattern="" title="" > 
 							</div>
 
-							<div class="register-but" style="display:none;" id="verifymobileotpBtn">
+							<div class="register-but"  id="verifymobileotpBtn">
 							<input type="submit" value="Verify OTP" name="verifymobileotpBtn" class="btn btn-default">
-							</div> -->
+							</div>
 						</form>
 					</div>
 					<div class="col-4" style="float:left; width:100px;height:300px; margin:75px;">
@@ -195,7 +217,42 @@ $(document).ready(function(){
 			<!---footer--->
 			<?php include 'footer.php' ?>
 			<!---footer--->
-			
-			
+<!-- <script>
+  $(document).ready(function(){
+	  $('#sendmobileotpBtn').click(function(){
+		  document.getElementById('mobileotpfield').style.display='block';
+		  document.getElementById('verifymobileotpBtn').style.display='block';
+		  document.getElementById('sendmobileotpBtn').style.display='none';
+		});
+	});
+</script>"; -->
+
+<?php 
+
+function sendOTP($email, $otp) {
+	require('phpmailer/class.phpmailer.php');
+	require('phpmailer/class.smtp.php');
+	
+	$message_body = "One Time Password for PHP login authentication is:<br/><br/>" . $otp;
+	$mail = new PHPMailer();
+	$mail->IsSMTP();
+	$mail->SMTPDebug = 0;
+	$mail->SMTPAuth = true;
+	$mail->SMTPSecure = 'tls'; // tls or ssl
+	$mail->Port     = "587";
+	$mail->Username = "neverlikebefore01@gmail.com";
+	$mail->Password = "";
+	$mail->Host     = "smtp.gmail.com";
+	$mail->Mailer   = "smtp";
+	$mail->SetFrom("neverlikebefore01@gmail.com", "web");
+	$mail->AddAddress($email);
+	$mail->Subject = "OTP to Login";
+	$mail->MsgHTML($message_body);
+	$mail->IsHTML(true);
+	$result = $mail->Send();
+	
+	return $result;
+}
+?>			
 </body>
 </html>

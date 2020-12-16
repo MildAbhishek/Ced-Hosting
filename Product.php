@@ -4,18 +4,18 @@ class Product{
     public $parentid;
     public $productid;
     public $productname;
-    public $link;
+    public $html;
     public $available;
     public $conn;
     public $result="";
 
-    public function addCategory($parentid, $categoryname, $link, $conn){
+    public function addCategory($parentid, $categoryname, $html, $conn){
         $sql= "SELECT * FROM tbl_product WHERE `prod_name`='$categoryname' ";
         $result= $conn->query($sql);
         if($result->num_rows > 0){
             return 2;
         } else {
-            $sql= "INSERT INTO tbl_product (`prod_parent_id`, `prod_name`, `link`) VALUES ('$parentid', '$categoryname', '$link')";
+            $sql= "INSERT INTO tbl_product (`prod_parent_id`, `prod_name`, `html`) VALUES ('$parentid', '$categoryname', '$html')";
             // echo $sql;
             $result= $conn->query($sql);
             if($result){
@@ -55,19 +55,19 @@ class Product{
         }
     }
 
-    public function editCategory($categoryid, $categoryname, $link, $available, $conn){
+    public function editCategory($categoryid, $categoryname, $html, $available, $conn){
         $sql= "SELECT * FROM tbl_product WHERE `id`='$categoryid' ";
         $result= $conn->query($sql);
         if ($result ->num_rows > 0){
             while($row= $result->fetch_assoc()){
-                if($categoryname == $row['prod_name'] && $link == $row['link'] && $available == $row['prod_available']){
+                if($categoryname == $row['prod_name'] && $html == $row['html'] && $available == $row['prod_available']){
                     // echo "<script>alert('Nothing Updated')</script>";
                     return 2;
                 }
             }
         }
         $arr=array();
-        $sql= "UPDATE tbl_product SET `prod_name`='$categoryname', `link`='$link', `prod_available`='$available' WHERE `id`='$categoryid' ";
+        $sql= "UPDATE tbl_product SET `prod_name`='$categoryname', `html`='$html', `prod_available`='$available' WHERE `id`='$categoryid' ";
         // echo $sql;
         $result= $conn->query($sql);
         if($result){
@@ -90,7 +90,7 @@ class Product{
     }
 
     // Add Product
-    public function addProduct($productcategory, $productname, $link, $conn){
+    public function addProduct($productcategory, $productname, $html, $conn){
         $parentid="";
         $sql= "SELECT * FROM tbl_product WHERE `prod_name`='$productcategory' ";
         $result= $conn->query($sql);
@@ -99,7 +99,7 @@ class Product{
                 $parentid= $row['id'];
             }
         } 
-        $sql= "INSERT INTO tbl_product (`prod_parent_id`, `prod_name`, `link`) VALUES ('$parentid', '$productname', '$link')";
+        $sql= "INSERT INTO tbl_product (`prod_parent_id`, `prod_name`, `html`) VALUES ('$parentid', '$productname', '$html')";
         // echo $sql;
         $result= $conn->query($sql);
         if($result){
@@ -134,7 +134,7 @@ class Product{
     // End of Add Product
     
     // Update Product
-    public function updateProduct($productid, $productcategory, $productname, $available, $link, $conn){
+    public function updateProduct($productid, $productcategory, $productname, $available, $html, $conn){
         $parentid="";
         $sql= "SELECT * FROM tbl_product WHERE `prod_name`='$productcategory' ";
         $result= $conn->query($sql);
@@ -143,7 +143,7 @@ class Product{
                 $parentid= $row['id'];
             }
         } 
-        $sql= "UPDATE tbl_product SET `prod_parent_id`='$parentid', `prod_name`='$productname', `link`='$link', `prod_available`='$available' WHERE `id`='$productid' ";
+        $sql= "UPDATE tbl_product SET `prod_parent_id`='$parentid', `prod_name`='$productname', `html`='$html', `prod_available`='$available' WHERE `id`='$productid' ";
         // echo $sql;
         $result= $conn->query($sql);
         if($result){
@@ -198,6 +198,14 @@ class Product{
         return $categoryname;
     }
 
+    public function fetchHtml($productid, $conn){
+        $sql= "SELECT `html` FROM tbl_product WHERE `id`='$productid'";
+        $result= $conn->query($sql);
+        $html= $result->fetch_array()[0] ?? '' ;
+        return $html;
+    }
+
+
     // Delete Product
 
     public function deleteProduct($productid, $conn){
@@ -211,7 +219,7 @@ class Product{
     }
 
     public function fetchAllProductDetail($id, $conn){
-        echo "<script>alert('Hii..');</script>";
+        // echo "<script>alert('Hii..');</script>";
         $arr= array();
         $sql= "SELECT * FROM tbl_product INNER JOIN tbl_product_description ON tbl_product.id = tbl_product_description.prod_id WHERE `prod_parent_id`='$id' ";
         $result= $conn->query($sql);

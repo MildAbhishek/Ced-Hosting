@@ -16,6 +16,9 @@
 <script type="text/javascript" src="resources/scripts/jquery.datePicker.js"></script>
 <script type="text/javascript" src="resources/scripts/jquery.date.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.22/datatables.min.js"></script>
+<!-- Text Area API -->
+<script src="https://cdn.tiny.cloud/1/xbxnoeo7hjxcj0z8n39jxvhnh7k4v647ybf0w6wsgxyuezqq/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<!-- End of Text Area API -->
 <script type="text/javascript" src="script.js"></script>
 </head>
 	<body><div id="body-wrapper"> <!-- Wrapper for the radial gradient background -->
@@ -25,7 +28,7 @@
 		$filename = basename($_SERVER['REQUEST_URI']);
 		//echo $filename;
 		//die();
-		$productmenu = array('products.php','categories.php');
+		$productmenu = array('products.php','categories.php', 'viewproduct.php');
 		$usermenu = array('users.php');
 	?>	
 			<h1 id="sidebar-title"><a href="#">Simpla Admin</a></h1>
@@ -55,7 +58,7 @@
 					<ul>
 						<li><a <?php if($filename=='products.php'): ?>class="current"<?php endif; ?> href="products.php">Add Products</a></li>
 						<li><a <?php if($filename=='categories.php'): ?>class="current"<?php endif; ?> href="categories.php">Add Category</a></li> <!-- Add class "current" to sub menu items also -->
-						<li><a href="#">View Products</a></li>
+						<li><a <?php if($filename=='viewproduct.php'): ?>class="current"<?php endif; ?> href="viewproduct.php">View Products</a></li>
 						<li><a href="#">Create New Offers</a></li>
 					</ul>
 				</li>

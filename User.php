@@ -23,6 +23,8 @@ class User{
             if ($result) {
             
                 // header('Location: login.php');
+                $_SESSION['signup']= array('mobile'=>$mobile, 'email'=>$email);
+
                 echo ("<script>alert('Successfully Registered')</script>");
                 header('Location: verification.php');
             } else {
@@ -47,7 +49,7 @@ class User{
                     if($row['is_admin']==0){
                         echo ("<script>alert('Successfully Logged In')</script>");
                         $_SESSION['userdata']=array('id'=>$row['id'], 'email'=>$row['email'], 'name'=> $row['name'], 'mobile'=>$row['mobile'], 'emailapproved'=>$row['email_approved'], 'phoneapproved'=>$row['phone_approved'], 'active'=>$row['active'], 'isadmin'=>$row['is_admin'], 'signupdate'=>$row['sign_up_date'], 'password'=>$row['password'], 'securityquestion'=>$row['security_question'], 'securityanswer'=>$row['security_answer']);
-                        header('Location: verification.php');
+                        header('Location: index.php');
                     }
                     if($row['is_admin']==1){
                         echo ("<script>alert('Successfully Logged In')</script>");
@@ -60,6 +62,18 @@ class User{
             echo ("<script>alert('Login Failed')</script>");
         }
         
+    }
+
+    public function verifyMobile($mobile, $conn){
+        // echo "<script>alert('Hii')</script>";
+        $sql= "UPDATE tbl_user SET `phone_approved`='1', `active`='1' WHERE `mobile`='$mobile' ";
+        $result= $conn->query($sql);
+        if($result){
+            echo "<script>alert('You are Verified Now')</script>";
+            header('Location: login.php');
+        } else {
+            echo "<script>alert('Verification Failed')</script>";
+        }
     }
 }
 ?>

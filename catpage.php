@@ -19,6 +19,8 @@ $result1= $newproduct->fetchAllProductDetail($id, $connection->conn);
 
 $parentname= $newproduct->fetchCategoryName($id, $connection->conn);
 
+$html= $newproduct->fetchHtml($id, $connection->conn);
+
 
 ?>
 
@@ -61,13 +63,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="linux-grids">
 								<div class="col-md-8 linux-grid">
 								<h2><?php echo $parentname; ?> Hosting</h2>
-								<ul>
+								<?php echo "$html" ; ?>
+								<!-- <ul>
 									<li><span>Unlimited </span> Domains, Disk Space, Bandwidth and Email Addresses</li>
 									<li><span>99.9% uptime </span> with dedicated 24/7 technical support</li>
 									<li><span>Powered by </span> CloudLinux, cPanel (demo), Apache, MySQL, PHP, Ruby & more</li>
 									<li><span>Launch  </span> your business with Rs. 2000* Google AdWords Credit *</li>
 									<li><span>30 day </span> Money Back Guarantee</li>
-								</ul>
+								</ul> -->
 									<a href="#viewplan">view plans</a>
 								</div>
 								<div class="col-md-4 linux-grid1">
@@ -88,6 +91,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
 									
 										<div class="linux-prices">
+										<?php if ($result1) { ?>
 										<?php foreach($result1 as $key=> $val ){?>
 
 											<?php 
@@ -123,6 +127,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											
 											</div>
 											<?php }?>
+											<?php } ?>
 
 											<!-- <div class="col-md-3 linux-price">
 												<div class="linux-top">

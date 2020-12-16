@@ -261,7 +261,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<h3>personal information</h3>
 					 <div>
 						<span>Full Name<label>*</label></span>
-						<input type="text" id="name" name="name" pattern="" title="Only Alphabets are allowed" required> 
+						<input type="text" id="name" name="name"  title="Only Alphabets are allowed" required> 
 					 </div>
 					 <!-- <div>
 						<span>Last Name<label>*</label></span>
@@ -269,7 +269,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					 </div> -->
 					 <div>
 						 <span>Email Address<label>*</label></span>
-						 <input type="text" id="email" name="email" pattern="" title="Only Valid Email Format is Required" required> 
+						 <input type="text" id="email" name="email" title="Only Valid Email Format is Required" required> 
 					 </div>
 					 <div>
 						<span>Mobile<label>*</label></span>
@@ -302,7 +302,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						    <h3>login information</h3>
 							 <div>
 								<span>Password<label>*</label></span>
-								<input type="password" name="password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+								<input type="password" name="password" id="password"  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
 							 </div>
 							 <div>
 								<span>Confirm Password<label>*</label></span>

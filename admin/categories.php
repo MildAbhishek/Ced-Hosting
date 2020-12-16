@@ -10,9 +10,9 @@ if(isset($_POST['submit'])){
     $parentid= $_POST['parentid'];
     $categoryname= $_POST['categoryname'];
     $categorylink= $_POST['categorylink'];
-    // echo "$categoryname";
+    // echo "<script>alert($parentid)</script>";
 
-    if($parentid !='' && $categoryname !='' && $categorylink !=''){
+    if($parentid !='' && $categoryname !=''){
         $result= $newproduct->addCategory($parentid, $categoryname, $categorylink, $connection->conn);
 		// unset($_POST);
 		if($result ==2){
@@ -100,8 +100,8 @@ $result= $newproduct->fetchCategory($connection->conn);
                                 </p>
                                 
                                 <p>
-									<label>Category Link</label>
-									    <input class="text-input small-input" type="text" id="editlink" name="editlink" /> <span class="input-notification success png_bg" style="display:none;">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
+									<label>Category HTML</label>
+									    <textarea class="text-input small-input" type="text" id="editlink" name="editlink" ></textarea> <span class="input-notification success png_bg" style="display:none;">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
 										<br /><small>Enter valid Link</small>
 								</p>
 
@@ -164,9 +164,9 @@ $result= $newproduct->fetchCategory($connection->conn);
 								<tr>
 								   <!-- <th><input class="check-all" type="checkbox" /></th> -->
 								   <th>Category Id</th>
-								   <th>Parent Id</th>
+								   <th>Parent Name</th>
 								   <th>Category Name</th>
-								   <th>Category link</th>
+								   <th>Category HTML</th>
 								   <th>Availability</th>
 								   <th>Launch Date</th>
 								   <th>Action</th>
@@ -202,18 +202,19 @@ $result= $newproduct->fetchCategory($connection->conn);
 							<tbody>
 							<?php foreach($result as $key=>$val){?>
 								<tr>
-
+								<?php $id= $val['prod_parent_id']; 
+								$parentname= $newproduct->fetchCategoryName($id, $connection->conn); ?>
 									
 									<!-- <td><input type="checkbox" /></td> -->
 									<td><?php echo $val['id'];?></td>
-									<td><?php echo $val['prod_parent_id'];?></td>
+									<td><?php echo $parentname; ?></td>
 									<td><?php echo $val['prod_name'];?></td>
-									<td><?php echo $val['link'];?></td>
+									<td><?php echo $val['html'];?></td>
 									<td><?php if($val['prod_available']==1) { echo ("Available");} else { echo ("Not Available");}?></td>
 									<td><?php echo $val['prod_launch_date'];?></td>
 									<td>
 										<!-- Icons -->
-										 <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" class="editCatBtn" data-id="<?php echo $val['id']?>" data-name="<?php echo $val['prod_name']?>" data-link="<?php echo $val['link']?>" data-available="<?php echo $val['prod_available']?>"/></a>
+										 <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" class="editCatBtn" data-id="<?php echo $val['id']?>" data-name="<?php echo $val['prod_name']?>" data-link="<?php echo $val['html']?>" data-available="<?php echo $val['prod_available']?>"/></a>
 										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" class="delCatBtn" data-id="<?php echo $val['id']?>"/></a>
 										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
 									</td>
@@ -233,7 +234,7 @@ $result= $newproduct->fetchCategory($connection->conn);
 							// alert("Validation");
 							$flag=0;
 							// $('#categoryparentid').blur(function(){
-							// 	// alert("KeyUp");
+							// 	alert("KeyUp");
 							// 	$id= document.getElementById('categoryparentid').value;
 							// 	$id= $.trim($id);
 							// 	$id = $id.replace(/ +/g, '');
@@ -241,7 +242,7 @@ $result= $newproduct->fetchCategory($connection->conn);
 							// })
 
 							$('#categoryname').blur(function(){
-								alert("KeyUp");
+								// alert("KeyUp");
 								var $categoryname= document.getElementById('categoryname').value;
 								$categoryname= $.trim($categoryname);
 								$categoryname = $categoryname.replace(/  +/g, ' ');
@@ -272,7 +273,8 @@ $result= $newproduct->fetchCategory($connection->conn);
 								
 								// var $categorylink= document.getElementById('categorylink').value;
 								if(($id != '') && ($categoryname != '')){
-									document.getElementById('submitBtn1').style.display="block";
+									$("#submitBtn1"). attr("disabled", false);
+									// document.getElementById('submitBtn1').style.display="block";
 								}
 
 							}
@@ -288,30 +290,30 @@ $result= $newproduct->fetchCategory($connection->conn);
 							<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
 								
 								<p>
-									<label>Category Parent</label>
+									<label>Category Parent<span style="color:red;">*</span></label>
 										
 										<select class="text-input small-input" id="categoryparentid"  name="parentid">
 											<option value="">Select</option>
 											<option value="1">Hosting</option>
 										</select>
-										<br /><small>Choose From Dropdown </small>
+										<br/><small>Choose From Dropdown </small>
                                 </p>
                                 
                                 <p>
-									<label>Category Name</label>
+									<label>Category Name<span style="color:red;">*</span></label>
 									    <input class="text-input small-input" type="text" id="categoryname" name="categoryname" placeholder="Ex: Abc" required/> <span class="input-notification success png_bg" style="display:none;">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
 										<br /><small>Enter only Alphabets</small>
                                 </p>
                                 
                                 <p>
-									<label>Category Link</label>
-									    <input class="text-input small-input" type="text" id="categorylink" name="categorylink" placeholder="Ex: www.abc.com"/> <span class="input-notification success png_bg" style="display:none;">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
+									<label>Category HTML</label>
+									    <textarea class="text-input small-input" type="text" id="categorylink" name="categorylink" placeholder="Ex: <p> abc </p>"></textarea> <span class="input-notification success png_bg" style="display:none;">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
 										<br /><small>Enter Link in valid format</small>
 								</p>
 								
 							
 								<p>
-									<input class="button" type="submit" value="Submit" name="submit" id="submitBtn1" style="display:none;"/>
+									<input class="button" type="submit" value="Submit" name="submit" id="submitBtn1" disabled/>
 								</p>
 								
 							</fieldset>
