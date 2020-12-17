@@ -6,12 +6,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 
 <?php
+session_start();
+
+$_SESSION['cart']=[];
+
 
 include_once 'Dbcon.php';
 include_once 'Product.php';
 
 $connection= new Dbcon();
 $newproduct= new Product();
+
 
 $id= $_GET['id'];
 // echo "<script>alert($id);</script>";
@@ -30,6 +35,7 @@ $html= $newproduct->fetchHtml($id, $connection->conn);
 <head>
 <title>Planet Hosting a Hosting Category Flat Bootstrap Responsive Website Template | Linux Hosting :: w3layouts</title>
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -38,12 +44,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
+
 <!---fonts-->
-<link href='//fonts.googleapis.com/css?family=Voltaire' rel='stylesheet' type='text/css'>
-<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<!-- <link href='//fonts.googleapis.com/css?family=Voltaire' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'> -->
 <!---fonts-->
 <!--script-->
-<link rel="stylesheet" href="css/swipebox.css">
+<!-- <link rel="stylesheet" href="css/swipebox.css"> -->
 			<script src="js/jquery.swipebox.min.js"></script> 
 			    <script type="text/javascript">
 					jQuery(function($) {
@@ -123,7 +130,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 														<li><strong>location</strong> : <img src="images/india.png"></li>
 													</ul>
 												</div>
-												<a href="#">buy now</a>
+												<a class="buyNowBtn" data-id="<?php echo $val['prod_id'];?>"
+										 		data-name="<?php echo $val['prod_name']; ?>"  data-catname="<?php echo $parentname;?>" data-link="<?php echo $val['html'];?>" 
+										 		data-available="<?php echo $val['prod_available'];?>"  data-date="<?php echo $val['prod_launch_date']; ?>"  data-monprice="<?php echo $val['mon_price']; ?>"
+										 		data-annprice="<?php echo $val['annual_price'];?>"  data-sku="<?php echo $val['sku'];?>" data-webspace='<?php echo "$webspace" ;?>'  
+										 		data-bandwidth='<?php echo "$bandwidth";?>'  data-freedomain='<?php echo "$freedomain";?>'  data-technologysupport='<?php echo "$technologysupport" ; ?>'  
+										 		data-mailbox='<?php echo "$mailbox" ; ?>'>buy now</a>
 											
 											</div>
 											<?php }?>
@@ -359,6 +371,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<?php include 'footer.php'; ?>
 			<!---footer--->
 			
-			
+			<script src="myscript.js"></script>		
 </body>
 </html>

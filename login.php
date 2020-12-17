@@ -6,6 +6,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <?php 
 session_start();
+print_r($_SESSION['cart']);
 include_once 'Dbcon.php';
 include_once 'User.php';
 
@@ -13,11 +14,14 @@ $connection= new Dbcon();
 $newuser= new User();
 
 if (isset($_POST['submit'])){
+	unset($_SESSION['signup']);
+
 	$email= $_POST['email'];
 	$password= $_POST['password'];
 
 	if($email != "" && $password != ""){
 		$newuser->login($email, $password, $connection->conn);
+
 
 	}else{
 		echo "<script>alert('All Fields are Required')</script>";

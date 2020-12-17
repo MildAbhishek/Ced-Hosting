@@ -1,5 +1,5 @@
 <?php 
-session_start();
+// session_start();
 include_once 'Dbcon.php';
 include_once 'Product.php';
 
@@ -59,7 +59,7 @@ $result= $newproduct->fetchCategory($connection->conn);
 								<li><a href="pricing.php">Pricing</a></li>
 								<li><a href="blog.php">Blog</a></li>
 								<li><a href="contact.php">Contact</a></li>
-								<li><a href="contact.php"><i class="fa fa-shopping-cart"></i></a></li>
+								<li><a href="cart.php"><i class="fa fa-shopping-cart"></i></a></li>
 								<?php if (isset($_SESSION['userdata'])){?>
 									<li><a href="logout.php">Logout</a></li>
 								

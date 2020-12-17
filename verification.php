@@ -12,6 +12,12 @@ if (isset($_SESSION['signup'])){
 	$mobile= $_SESSION['signup']['mobile'];
 	$email= $_SESSION['signup']['email'];
 }
+
+if (isset($_SESSION['login'])) {
+	$mobile= $_SESSION['login']['mobile'];
+	$email= $_SESSION['login']['email'];
+}
+
 $message="";
 
 if(isset($_POST['sendmobileotpBtn'])){
@@ -154,7 +160,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<form class="form-horizontal" action="" method="POST">
 							<div>
 								<span>Mobile<label>*</label></span>
-								<input type="number" id="mobile" name="mobilenumber" value="<?php echo $mobile; ?>" title="Only Valid Mobile Number is desired" > 
+								<input type="number" id="mobile" name="mobilenumber" value="<?php echo $mobile; ?>" title="Only Valid Mobile Number is desired" readonly> 
 							</div>
 							
 							<div class="register-but" id="sendmobileotpBtn">
@@ -190,20 +196,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</form> -->
 					</div>
 					<div class="col-4" style="float:left; width:100px;height:300px; margin:75px;">
-					<form class="form-horizontal" action="/action_page.php">
+					<form class="form-horizontal" action="" method="POST">
 							<div>
 								<span>Email<label>*</label></span>
-								<input type="text" id="email" name="email" value="<?php echo $email; ?>" title="Only Valid Email Format is Required" required> 
+								<input type="text" id="email" name="email" value="<?php echo $email; ?>" title="Only Valid Email Format is Required" readonly> 
 							</div>
-							<div>
-								<span>OTP<label>*</label></span>
-								<input type="text" id="emailotp" name="emailotp" pattern="" title="" required> 
-							</div>
-							<div class="register-but">
+							<div class="register-but" id="sendemailotpBtn">
 							<!-- <form> -->
-							<input type="submit" value="submit" name="submit" class="btn btn-default">
+							<input type="submit" value="Send OTP" name="sendemailotpBtn" class="btn btn-default">
 							<!-- <div class="clearfix"> </div> -->
-					
+							</div>
+
+							<div id="emailotpfield">
+								<span>OTP<label>*</label></span>
+								<input type="number" name="emailotpfield" > 
+							</div>
+
+							<div class="register-but"  id="verifyemailotpBtn">
+							<input type="submit" value="Verify OTP" name="verifyemailotpBtn" class="btn btn-default">
 							</div>
 						</form>
 					</div>
@@ -228,23 +238,41 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </script>"; -->
 
 <?php 
+if (isset($_POST['sendemailotpBtn'])) {
+	// echo "``<script>alert('Hii...')</script>";
+	$email= $_POST['email'];
+	$_SESSION['email']=$email;
+	// echo "<script>alert($email)</script>";
+	$otp = rand(1000, 9999);
+	$_SESSION['session_otp'] = $otp;
+	$result= sendOTP($email, $otp);
+	
+    // $message = "Your One Time Password is " .$otp;
+
+}
+?>
+
+
+<?php 
 
 function sendOTP($email, $otp) {
+	// echo "<script>alert('$otp')</script>";
 	require('phpmailer/class.phpmailer.php');
 	require('phpmailer/class.smtp.php');
 	
 	$message_body = "One Time Password for PHP login authentication is:<br/><br/>" . $otp;
+	// echo "<script>alert('$message_body')</script>";
 	$mail = new PHPMailer();
 	$mail->IsSMTP();
 	$mail->SMTPDebug = 0;
 	$mail->SMTPAuth = true;
 	$mail->SMTPSecure = 'tls'; // tls or ssl
 	$mail->Port     = "587";
-	$mail->Username = "neverlikebefore01@gmail.com";
-	$mail->Password = "";
+	$mail->Username = "abhishekanand8357@gmail.com";
+	$mail->Password = "M1ldmitthu5521";
 	$mail->Host     = "smtp.gmail.com";
 	$mail->Mailer   = "smtp";
-	$mail->SetFrom("neverlikebefore01@gmail.com", "web");
+	$mail->SetFrom("abhishekanand8357@gmail.com", "web");
 	$mail->AddAddress($email);
 	$mail->Subject = "OTP to Login";
 	$mail->MsgHTML($message_body);

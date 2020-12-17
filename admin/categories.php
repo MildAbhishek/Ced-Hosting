@@ -215,7 +215,7 @@ $result= $newproduct->fetchCategory($connection->conn);
 									<td>
 										<!-- Icons -->
 										 <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" class="editCatBtn" data-id="<?php echo $val['id']?>" data-name="<?php echo $val['prod_name']?>" data-link="<?php echo $val['html']?>" data-available="<?php echo $val['prod_available']?>"/></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" class="delCatBtn" data-id="<?php echo $val['id']?>"/></a>
+										 <a href="" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" class="delCatBtn" data-id="<?php echo $val['id']?>"/></a>
 										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
 									</td>
 									

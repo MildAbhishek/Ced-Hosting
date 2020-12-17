@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 class User{
     public $email;
     public $name;
@@ -11,10 +11,10 @@ class User{
     
     public function signup($email, $name, $mobile, $password, $question, $answer, $conn) {
         $password= md5($password);
-        $sql= "SELECT * FROM tbl_user WHERE `email`='$email' ";
+        $sql= "SELECT * FROM tbl_user WHERE `email`='$email' OR `mobile`= '$mobile' ";
         $result= $conn->query($sql);
         if($result->num_rows > 0){
-            echo ("<script>alert('Email Already Exist')</script>");
+            echo ("<script>alert('User Already Exist')</script>");
         }else{
             $sql="INSERT INTO tbl_user (`email`, `name`, `mobile`, `password`, `security_question`, `security_answer`) VALUES('$email', '$name', '$mobile', '$password', '$question', '$answer')";
          
@@ -43,7 +43,9 @@ class User{
         if ($result->num_rows > 0) {
             while($row= $result->fetch_assoc()){
                 if($row['active']==0){
-                    echo ("<script>alert('Your Mobile or Email is not verified Yet.')</script>"); 
+                    echo ("<script>alert('Your Mobile or Email is not verified Yet.')</script>");
+                    $_SESSION['login']= array('mobile'=>$row['mobile'], 'email'=>$row['email']);
+                    header('Location: verification.php'); 
                 } else {
                     // header('Location: login.php');
                     if($row['is_admin']==0){
@@ -59,7 +61,7 @@ class User{
                 }
             }
         }else {
-            echo ("<script>alert('Login Failed')</script>");
+            echo ("<script>alert('login Failed')</script>");
         }
         
     }
@@ -72,7 +74,19 @@ class User{
             echo "<script>alert('You are Verified Now')</script>";
             header('Location: login.php');
         } else {
-            echo "<script>alert('Verification Failed')</script>";
+            echo "<script>alert('Mobile Verification Failed')</script>";
+        }
+    }
+
+    public function verifyEmail($email, $conn){
+        // echo "<script>alert('Hii')</script>";
+        $sql= "UPDATE tbl_user SET `email_approved`='1', `active`='1' WHERE `email`='$email' ";
+        $result= $conn->query($sql);
+        if($result){
+            echo "<script>alert('You are Verified Now')</script>";
+            header('Location: login.php');
+        } else {
+            echo "<script>alert('Email Verification Failed')</script>";
         }
     }
 }

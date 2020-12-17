@@ -73,7 +73,7 @@ $(document).ready(function(){
         if(confirm("Do You Really want to Delete This Product")){
             // alert("DelBtn");
             $dataId = $(this).attr("data-id");
-            $action= "deleteproduct"
+            $action= "deleteproduct",
             // alert($dataId);
             $.ajax({
                 url:'ajax.php',
@@ -293,5 +293,7 @@ $(document).ready(function(){
 //End of Validations for Add Product Table.
 // })
 
-// Validations for Update Product table
+
+
+
 });

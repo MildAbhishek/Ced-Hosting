@@ -5,7 +5,8 @@ include_once '../Product.php';
 $connection= new Dbcon();
 $newproduct= new Product();
 
-if(isset($_POST)){
+// if(isset($_POST)){
+    
     $id= $_POST['id'];
     $action= $_POST['action'];
     // echo $id;
@@ -27,5 +28,9 @@ if(isset($_POST)){
             echo 0;
         }
     }
- }
+
+   
+
+   
+//  }
 ?>

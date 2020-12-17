@@ -7,6 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!--  -->
 <?php 
+session_start();
 include 'Dbcon.php';
 include 'User.php';
 $connection= new Dbcon();
@@ -14,8 +15,9 @@ $newuser= new User();
 $errors=array();
 
  if(isset($_POST['submit'])){
-	$name= $_POST['name'];
+	unset($_SESSION['login']);
 	
+	$name= $_POST['name'];
 	$email= $_POST['email'];
 	$mobile= $_POST['mobile'];
 	$question= $_POST['question'];

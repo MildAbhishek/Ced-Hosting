@@ -3661,3 +3661,194 @@ a.button2 {
     width: 30%;
 }
 }
+
+
+
+
+/*==================
+ CART VIEW PAGE
+====================*/
+
+/* #cart-view {
+    display: inline;
+    float: left;
+    width: 100%;
+} */
+
+#cart-view .cart-view-area {
+    display: inline;
+    float: left;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    width: 100%;
+}
+
+#cart-view .cart-view-area .cart-view-table {
+    background-color: #F5F5F5;
+    display: inline;
+    float: left;
+    width: 100%;
+    padding: 30px;
+    min-height: 350px;
+}
+
+#cart-view .cart-view-area .cart-view-table .table {
+    border: 1px solid #ddd;
+}
+
+#cart-view .cart-view-area .cart-view-table .table thead tr th {
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    color: #555;
+    font-size: 18px;
+    padding: 20px 0;
+    text-align: center;
+}
+
+#cart-view .cart-view-area .cart-view-table .table tbody tr td {
+    vertical-align: middle;
+    border-right: 1px solid #ccc;
+    text-align: center;
+}
+
+#cart-view .cart-view-area .cart-view-table .table tbody tr td .remove {
+    color: #ff0000;
+    padding: 5px;
+}
+
+#cart-view .cart-view-area .cart-view-table .table tbody tr td .remove:hover {
+    color: #555;
+}
+
+#cart-view .cart-view-area .cart-view-table .table tbody tr td img {
+    width: 80px;
+    height: 100px;
+}
+
+#cart-view .cart-view-area .cart-view-table .table tbody tr td .aa-cart-quantity {
+    padding: 5px;
+    width: 50px;
+}
+
+#cart-view .cart-view-area .cart-view-table .table tbody tr .aa-cart-view-bottom {
+    padding: 50px;
+}
+
+#cart-view .cart-view-area .cart-view-table .table tbody tr .aa-cart-view-bottom .aa-cart-coupon {
+    float: left;
+}
+
+#cart-view .cart-view-area .cart-view-table .table tbody tr .aa-cart-view-bottom .aa-cart-coupon .aa-coupon-code {
+    border: 1px solid #e5e5e5;
+    color: #505050;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    line-height: 25px;
+    margin-right: 20px;
+    min-width: 250px;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+#cart-view .cart-view-area .cart-view-table .cart-view-total {
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#cart-view .cart-view-area .cart-view-table .cart-view-total h4 {
+    color: #555;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+#cart-view .cart-view-area .cart-view-table .cart-view-total .aa-totals-table {
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+#cart-view .cart-view-area .cart-view-table .cart-view-total .aa-totals-table tr th {
+    padding: 10px;
+    text-align: center;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+#cart-view .cart-view-area .cart-view-table .cart-view-total .aa-totals-table tr td {
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    padding: 10px;
+}
+
+#cart-view .cart-view-area .cart-view-table .cart-view-total a {
+    margin-top: 30px;
+    display: inline-block;
+    float: none;
+}
+
+.aa-add-to-cart-btn {
+    border: 1px solid #ccc;
+    color: #555;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    margin-top: 5px;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    transition: all 0.5s ease 0s;
+}
+
+.aa-add-to-cart-btn span {
+    margin-right: 5px;
+}
+
+.aa-filter-btn {
+    color: #fff;
+    font-size: 15px;
+    height: 30px;
+    width: 80px;
+}
+
+.aa-cart-view-btn {
+    float: right;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+.aa-cart-view-btn:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+#cart-view .cart-view-area .cart-view-table .table tbody tr td .aa-cart-title {
+    color: #ff6666;
+}
+
+#cart-view .cart-view-area .cart-view-table .table tbody tr td .aa-cart-title:hover {
+    color: #ff6666;
+}
+.aa-cart-view-btn {
+    background-color: #ff6666;  
+  }
+/*==================
+   CHECKOUT PAGE
+  ====================*/
