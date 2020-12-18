@@ -565,7 +565,7 @@ if(isset($_POST['update'])){
 								</p>
 								
 								<p>
-									<label>Text Area For</label>
+									<label>Text Area For HTML</label>
 									<textarea class="text-input small-input"  id="pageurl" name="pageurl" placeholder="Ex: <html>Type Your Text Here</html>"> </textarea><span class="input-notification error png_bg" style="display:none">Error message</span>
                                     <br><small>Enter HTML in valid format</small>
 								</p><br>

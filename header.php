@@ -21,7 +21,7 @@ $result= $newproduct->fetchCategory($connection->conn);
 								<i class="icon-bar"></i>
 							</button>				  
 							<div class="navbar-brand">
-								<h1><a href="index.html">Ced Hosting</a></h1>
+								<h1><a href="index.php"><span color:>Ced</span> <span>Hosting</span></a></h1>
 							</div>
 						</div>
 

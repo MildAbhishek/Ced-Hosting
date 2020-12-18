@@ -1,10 +1,10 @@
 // $(document).ready(function () {
-    alert("Hii...");
+    // alert("Hii...");
         // console.log('47');
     
     // Buy Now Button
     $('.buyNowBtn').click(function(){
-        alert("Hii..");
+        // alert("Hii..");
         var action = "cart";
 
         var dataId = $(this).data("id");
@@ -23,7 +23,7 @@
         // var dataMailbox = $(this).data("data-mailbox");
         // alert("Buy Now Btn");
         // alert(dataSku);
-        console.log(dataSku);
+        // console.log(dataSku);
 
 
 

@@ -1,5 +1,12 @@
-<?php session_start(); 
-print_r($_SESSION['cart']);
+<?php 
+session_start(); 
+// print_r($_SESSION['cart']);
+
+if (isset($_GET['deleteproduct'])) {
+    $id= $_GET['deleteproduct'];
+    // echo "<script>alert(".$_SESSION['cart'][$id].")</script>";
+    unset($_SESSION['cart'][$id]);
+}
 ?>
 <!--
 Author: W3layouts
@@ -72,25 +79,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>SKU</th>
+                                                <th>ID</th>
                                                 <th>Product Name</th>
                                                 <th>Category Name</th>
-                                                <th>Monthly Price</th>
-                                                <!-- <th>Annual Price</th> -->
-                                                <!-- <th>Quantity</th> -->
-                                                <th>Total</th>
-                                                <th>Delete</th>
+                                                <th>SKU</th>
+                                                <th>Billing Cycle</th>
+                                                <th>Amount</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php $subtotal=0; ?>
+                                            
                                             <?php foreach($_SESSION['cart'] as $key=> $val) {?>
+                                           
                                             <tr>
                                                 
                                                 <td><?php echo $val['id']; ?></td>
                                                 <td><?php echo $val['name']; ?></td>
                                                 <td><?php echo $val['category']; ?></td>
-                                                <td><?php echo $val['monprice']; ?></td>
+                                                <td><?php echo $val['sku']; ?></td>
+                                                <td>Billing Cycle</td>
                                                 <!-- <td><input class="aa-cart-quantity" type="number" value="1"></td> -->
                                                 <td><?php echo $val['monprice']; ?></td>
                                                 <td><a class="remove" href="cart.php?deleteproduct=<?php echo $key; ?>" data-id="<?php echo $key; ?>">
@@ -100,6 +109,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                 <?php $subtotal= $subtotal + $val['monprice']; ?>
                                             </tr>
                                             <?php } ?>
+                                            
                                             <!-- <tr>
                                                 <td><a class="remove" href="#">
                                                         <fa class="fa fa-close"></fa>
@@ -163,4 +173,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     // $('.remove').click(function(){
     //     alert("Delete");
     // })
+    function myfun(){
+        // alert("Hello");
+        var id= $(this).data("did");
+        alert(id);
+        // $price= document.getElementById('selectplan').value;
+        // alert($price);
+        // document.getElementById('price').value=$price;
+    }
 </script>

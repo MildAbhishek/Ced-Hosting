@@ -7,9 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <?php
 session_start();
-
 $_SESSION['cart']=[];
-
 
 include_once 'Dbcon.php';
 include_once 'Product.php';
